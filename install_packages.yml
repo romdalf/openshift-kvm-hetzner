@@ -1,0 +1,27 @@
+- hosts: hetzner
+  gather_facts: false
+
+  tasks:
+  - name: update system
+    become: yes
+    yum:
+      name: '*'
+      state: latest
+
+  - name: install libvirt and kvm 
+    become: yes
+    yum:
+      name: qemu-kvm,libvirt,libguestfs-tools,virt-install
+      state: latest
+
+  - name: enable libvirtd service
+    become: yes
+    service:
+      name: libvirtd
+      state: enable
+
+  - name: start libvirtd service
+    become: yes
+    service:
+      name: libvirtd
+      state: started
