@@ -4,15 +4,15 @@
   tasks:
   - name: update system
     become: yes
-    yum:
+    dnf:
       name: '*'
       state: latest
 
   - name: install libvirt and kvm 
     become: yes
-    yum:
-      name: qemu-kvm,libvirt,libguestfs-tools,virt-install
-      state: latest
+    dnf:
+      name: qemu-kvm,qemu-img,libvirt,virt-install,libvirt-client,libguestfs-tools 
+      state: present
 
   - name: start libvirtd service
     become: yes

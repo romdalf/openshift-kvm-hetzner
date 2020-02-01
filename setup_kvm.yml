@@ -1,0 +1,31 @@
+- hosts: hetzner
+  gather_facts: false
+
+  tasks:
+  - name: create kvm & images directories
+    become: yes
+    file:
+      path: /srv/kvm/images
+      state: directory
+
+  - name: create kvm config directory
+    become: yes
+    file:
+      path: /srv/kvm/config
+      state: directory
+
+  - name: copy kvm openshift external network
+    become: yes
+    copy:
+        src: ../files/
+        #openshift-externalservices.xml
+        dest: /srv/kvm/config
+
+#   - name: copy kvm openshift internal network
+#     become: yes
+#     copy:
+#         src: ../files/openshift-cluster.xml
+#         dest: /srv/kvm/config
+
+
+

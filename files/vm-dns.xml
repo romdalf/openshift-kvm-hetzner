@@ -1,0 +1,23 @@
+<domain type='kvm'>
+  <name>dns.cluster.myshiny.space</name>
+  <memory>1024000</memory>
+  <vcpu>1<vcpu>
+  <os>
+    <type arch='x86_64'>hvm</type>
+    <boot dev='cdrom' />
+  </os>
+  <devices>
+      <emulator>/usr/libexec/qemu-kvm</emulator>
+      <disk type='file' device='disk'>
+        <source file='/var/lib/libvirt/images/vm-dns01.img' />
+        <target dev='hda' />
+      </disk>
+      <interface type='network'>
+        <mac address='52:54:00:2c:00:10'/>
+        <source network='openshift-dns'/>
+        <model type='virtio'/>
+        <address type='pci' domain='0x0000' bus='0x00' slot='0x03' function='0x0'/>
+      </interface>
+      <graphics type='vnc' port='-1' keymap='us' />
+  <devices>
+</domain>
